@@ -1,35 +1,54 @@
 package eci.ieti.bookingsystem.service.user;
 
-import eci.ieti.bookingsystem.repository.user.User;
-import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
+import eci.ieti.bookingsystem.exception.UserNotFoundException;
+import eci.ieti.bookingsystem.repository.user.User;
 
 @Service
 public class UsersServiceMap implements UsersService {
 
+    Map<String, User> users = new HashMap<>();
+
     @Override
     public User save(User user) {
-        return null;
+        users.put(user.getId(), user);
+        return user;
     }
 
     @Override
     public Optional<User> findById(String id) {
-        return Optional.empty();
+        if (!users.containsKey(id))
+            throw new UserNotFoundException(id);
+        User user = users.get(id);
+        return Optional.of(user);
     }
 
     @Override
     public List<User> all() {
-        return List.of();
+        List<User> userList = new ArrayList<>();
+        userList.addAll(users.values());
+        return userList;
     }
 
     @Override
     public void deleteById(String id) {
-
+        if (!users.containsKey(id)){
+            throw new UserNotFoundException(id);
+        }
+        users.remove(id);
     }
 
     @Override
     public User update(User user, String userId) {
-        return null;
+        if (!users.containsKey(userId)) {
+            throw new UserNotFoundException(userId);
+        }
+        users.put(userId, user);
+        return user;
     }
 }
