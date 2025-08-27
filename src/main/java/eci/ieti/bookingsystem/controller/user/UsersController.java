@@ -1,4 +1,4 @@
 package eci.ieti.bookingsystem.controller.user;
 
-public class UserController {
+public class UsersController {
 }
