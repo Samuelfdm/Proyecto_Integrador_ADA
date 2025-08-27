@@ -1,10 +1,10 @@
-package com.example.demo;
+package eci.ieti.bookingsystem;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class BookingSystemApplicationTests {
 
 	@Test
 	void contextLoads() {
